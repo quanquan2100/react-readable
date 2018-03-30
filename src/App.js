@@ -1,18 +1,89 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Route, Link } from 'react-router-dom';
+import IconComment from "react-icons/lib/md/comment"
+import IconAccount from "react-icons/lib/md/perm-identity"
+import IconLike from "react-icons/lib/md/favorite-border"
+import IconAdd from "react-icons/lib/md/add"
+import IconArrowRight from "react-icons/lib/md/keyboard-arrow-right"
+import IconTag from "react-icons/lib/md/local-offer"
+import IconTime from "react-icons/lib/md/schedule"
+import IconGithub from "react-icons/lib/fa/github"
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+        <header className="">
+          <h1 className="">React Project 2 - Readable</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="column-2">
+          <div className="column-left">
+            <div className="categories">
+              <Link to="/">全部分类</Link>
+              <ul className="categories-list">
+                <li className="categories-item">
+                  <Link to="/category?sort=name"><IconTag /> 分类一 ( 10 )</Link>
+                </li>
+                <li className="categories-item active">
+                  <Link to="/category?sort=name"><IconTag /> 分类二 ( 16 )</Link>
+                </li>
+                <li className="categories-item">
+                  <Link to="/category?sort=name"><IconTag /> 分类三 ( 34 )</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="column-right">
+
+            
+
+            <div className="breadcrumbs">
+              <div className="btn-group">
+                <div className="btn"><IconTime /> 日期优先</div>
+                <div className="btn active"><IconLike/> 投票优先</div>
+              </div>
+              <ul className="breadcrumbs-list">
+                <li className="breadcrumbs-item">全部分类 <IconArrowRight/></li>
+                <li className="breadcrumbs-item active">分类二</li>
+              </ul>
+            </div>
+            
+            <div className="">
+              <ul className="article-list">
+                <li className="article-item">
+                  <div className="article-time">2018-03-21</div>
+                  <h2 className="article-title"><Link to="/detail">Node 调试工具入门教程</Link></h2>
+                  <div className="article-info">
+                    <div className="article-author"><IconAccount/> 作者: 灰仔</div>
+                    <div className="article-comment"><IconComment/> 评论数 ( 10 )</div>
+                    <div className="article-like"><IconLike/> 投票数 ( 17 )</div>
+                  </div>
+                </li>
+                <li className="article-item">
+                  <div className="article-time">2018-03-21</div>
+                  <h2 className="article-title"><Link to="/detail">Node 调试工具入门教程</Link></h2>
+                  <div className="article-info">
+                    <div className="article-author"><IconAccount/> 作者: 灰仔</div>
+                    <div className="article-comment"><IconComment/> 评论数 ( 10 )</div>
+                    <div className="article-like"><IconLike/> 投票数 ( 17 )</div>
+                  </div>
+                </li>
+                <li className="article-item">
+                  <div className="article-time">2018-03-21</div>
+                  <h2 className="article-title"><Link to="/detail">Node 调试工具入门教程</Link></h2>
+                  <div className="article-info">
+                    <div className="article-author"><IconAccount/> 作者: 灰仔</div>
+                    <div className="article-comment"><IconComment/> 评论数 ( 10 )</div>
+                    <div className="article-like"><IconLike/> 投票数 ( 17 )</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="create" title="新建帖子"><IconAdd size="70"/></div>
+        </div>
+        <footer>made by quanquan, <a href="https://github.com/quanquan2100/react-readable" target="_blank">view in github <IconGithub /></a></footer>
       </div>
     );
   }
