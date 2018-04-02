@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import IconAccount from "react-icons/lib/md/perm-identity"
 
 // import action creater
-import { closeModal } from '../actions'
+import { closePostModal } from '../actions'
 
 const customStyles = {
   overlay: {
@@ -35,7 +35,7 @@ class EditPostModal extends React.Component {
 
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
-    // this.closeModal = this.closeModal.bind(this);
+    // this.closePostModal = this.closePostModal.bind(this);
   }
 
   openModal() {
@@ -47,7 +47,7 @@ class EditPostModal extends React.Component {
   afterOpenModal() {
   }
 
-  // closeModal() {
+  // closePostModal() {
   //   this.setState({modalIsOpen: false});
   // }
 
@@ -114,7 +114,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    close: () => dispatch(closeModal()),
+    close: () => dispatch(closePostModal()),
   }
 }
 

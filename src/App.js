@@ -21,6 +21,8 @@ import IconTitle from "react-icons/lib/md/toc"
 import IconGithub from "react-icons/lib/fa/github"
 import IconDelete from "react-icons/lib/md/delete"
 import IconEdit from "react-icons/lib/md/edit"
+import IconBack from "react-icons/lib/md/arrow-back"
+
 
 
 // import action creater
@@ -46,6 +48,7 @@ class App extends Component {
         </header>
 
         <div className="detail">
+          <div className="back"><IconBack /> 返回</div>
           <h2 className="article-title"><Link to="/detail">Node 调试工具入门教程</Link></h2>
           <div className="article-info">
             <div className=""><IconTime/> 2018-03-21</div>
@@ -131,7 +134,7 @@ class App extends Component {
           </div>
           <div className="like-btn"><IconLike size="30" /> 点击投票</div>
         </div>
-
+        <EditPostModal />
         <footer>made by quanquan, <a href="https://github.com/quanquan2100/react-readable" target="_blank">view in github <IconGithub /></a></footer>
       </div>
     );

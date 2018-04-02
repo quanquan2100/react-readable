@@ -13,7 +13,7 @@ import IconTime from "react-icons/lib/md/schedule"
 import IconGithub from "react-icons/lib/fa/github"
 
 // import action creater
-import { openModal } from '../actions'
+import { openPostModal } from '../actions'
 
 class DefaultView extends React.Component {
   constructor(props) {
@@ -97,7 +97,7 @@ function mapStateToProps ({ modalIsOpen }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    newPost: () => dispatch(openModal())
+    newPost: () => dispatch(openPostModal())
   }
 }
 

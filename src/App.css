@@ -321,3 +321,17 @@ select {
   color: #fff;
   background-color: #19ba9b;
 }
+
+.back {
+  float: right;
+  color: #19ba9b;
+  cursor: pointer;
+  transition: all .2s;
+  padding: 5px 9px;
+  font-size: 1rem;
+}
+
+.back:hover {
+  color: #fff;
+  background-color: #19ba9b;
+}
