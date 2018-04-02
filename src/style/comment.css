@@ -1,7 +1,19 @@
 .comment {
   color: #555;
 }
-
+.comment-add {
+  margin: 50px auto 30px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    padding: 20px;
+    cursor: pointer;
+}
+.comment-add:hover {
+  background-color: #19ba9b;
+  color: #fff;
+}
 .comment-list {
   list-style: none;
   padding-left: 0;

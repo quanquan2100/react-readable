@@ -19,6 +19,9 @@ import IconTag from "react-icons/lib/md/local-offer"
 import IconTime from "react-icons/lib/md/schedule"
 import IconTitle from "react-icons/lib/md/toc"
 import IconGithub from "react-icons/lib/fa/github"
+import IconDelete from "react-icons/lib/md/delete"
+import IconEdit from "react-icons/lib/md/edit"
+
 
 // import action creater
 import { openModal } from './actions'
@@ -79,12 +82,15 @@ class App extends Component {
 
           </div>
           <div className="comment">
+            <div className="comment-add" title="添加评论">
+              <IconComment size="30"/>
+            </div>
             <ul className="comment-list">
               <li className="comment-item">
                 <div className="comment-body">
                   <div className="comment-tool">
-                    <div className="comment-edit">修改</div>
-                    <div className="comment-del">删除</div>
+                    <div className="comment-edit"><IconEdit />修改</div>
+                    <div className="comment-del"><IconDelete />删除</div>
                   </div>
                   <div className="comment-info">
                     <h3 className="comment-author">James Coolman</h3>
