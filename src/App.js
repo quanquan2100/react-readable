@@ -1,6 +1,5 @@
- import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-import Default from "./components/Default"
 import './App.css';
 import RichTextEditor from 'react-rte';
 import Modal from "react-modal"
@@ -24,6 +23,7 @@ import { openModal } from './actions'
 
 // import component
 import EditPostModal from "./components/EditPostModal"
+import DefaultView from "./components/DefaultView"
 
 
 class App extends Component {
@@ -34,16 +34,17 @@ class App extends Component {
 
   render() {
     const { newPost } = this.props;
-    
+
     return (
       <div className="App">
         <header className="">
           <h1 className="">React Project 2 - Readable</h1>
         </header>
-        <button onClick={() => newPost()}>Open Modal</button>
         
-        <EditPostModal/>
+        <DefaultView />
         
+        <EditPostModal />
+
         <footer>made by quanquan, <a href="https://github.com/quanquan2100/react-readable" target="_blank">view in github <IconGithub /></a></footer>
       </div>
     );

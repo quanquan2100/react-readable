@@ -9,13 +9,18 @@ import IconAccount from "react-icons/lib/md/perm-identity"
 import { closeModal } from '../actions'
 
 const customStyles = {
+  overlay: {
+    zIndex                : 11,
+    backgroundColor       : "rgba(0,0,0,.3)"
+  },
   content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    top                   : "50%",
+    left                  : "50%",
+    right                 : "auto",
+    bottom                : "auto",
+    marginRight           : "-50%",
+    transform             : "translate(-50%, -50%)",
+    boxShadow             : "0 0 15px 0 rgba(0, 0, 0, 0.4)"
   }
 };
 

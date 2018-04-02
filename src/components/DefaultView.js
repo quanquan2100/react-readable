@@ -1,5 +1,8 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+// import icon
 import IconComment from "react-icons/lib/md/comment"
 import IconAccount from "react-icons/lib/md/perm-identity"
 import IconLike from "react-icons/lib/md/favorite-border"
@@ -9,12 +12,16 @@ import IconTag from "react-icons/lib/md/local-offer"
 import IconTime from "react-icons/lib/md/schedule"
 import IconGithub from "react-icons/lib/fa/github"
 
-export default class Default extends React.Component {
+// import action creater
+import { openModal } from '../actions'
+
+class DefaultView extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
+    const { newPost } = this.props;
     return (
       <div className="column-2">
         <div className="column-left">
@@ -80,8 +87,23 @@ export default class Default extends React.Component {
             </ul>
           </div>
         </div>
-        <div className="create" title="新建帖子"><IconAdd size="70"/></div>
+        <div className="create" onClick={() => newPost()} title="新建帖子"><IconAdd size="70"/></div>
       </div>
     );
   }
 }
+
+function mapStateToProps ({ modalIsOpen }) {
+  return {}
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    newPost: () => dispatch(openModal())
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DefaultView);
