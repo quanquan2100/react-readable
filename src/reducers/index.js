@@ -6,7 +6,8 @@ import {
 } from '../actions'
 
 const globalReducerState = {
-  modalIsOpen: false
+  modalIsOpen: false,
+  category: "all"
 }
 
 function globalReducer(state = globalReducerState, action) {
