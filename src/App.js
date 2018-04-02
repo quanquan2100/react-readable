@@ -44,7 +44,7 @@ class App extends Component {
         <header className="">
           <h1 className="">React Project 2 - Readable</h1>
         </header>
-        
+
         <div className="detail">
           <h2 className="article-title"><Link to="/detail">Node 调试工具入门教程</Link></h2>
           <div className="article-info">
@@ -52,39 +52,38 @@ class App extends Component {
             <div className="article-author"><IconAccount/> 作者: 灰仔</div>
             <div className="article-comment"><IconComment/> 评论数 ( 10 )</div>
             <div className="article-like"><IconLike/> 投票数 ( 17 )</div>
+            <div className="post-operate"><IconEdit /> 修改</div>
+            <div className="post-operate"><IconDelete />删除</div>
           </div>
           <div className="detail-ctx">
 
 <div className="markdown-body">
-<p>This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.</p>
-<p>This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.</p>
-<h2>Start Developing</h2>
-<p>To get started developing right away:</p>
-<ul>
-<li>Install and start the API server
-<ul>
-<li><code>cd api-server</code></li>
-<li><code>npm install</code></li>
-<li><code>node server</code></li>
-</ul>
-</li>
-<li>In another terminal window, use Create React App to scaffold out the front-end
-<ul>
-<li><code>create-react-app frontend</code></li>
-<li><code>cd frontend</code></li>
-<li><code>npm start</code></li>
-</ul>
-</li>
-</ul>
-<h2>API Server</h2>
-<p>Information about the API server and how to use it can be found in its <a href="/quanquan2100/react-readable/blob/master/api-server/README.md">README file</a>.</p>
+  <p>This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.</p>
+  <p>This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.</p>
+  <h2>Start Developing</h2>
+  <p>To get started developing right away:</p>
+  <ul>
+  <li>Install and start the API server
+  <ul>
+  <li><code>cd api-server</code></li>
+  <li><code>npm install</code></li>
+  <li><code>node server</code></li>
+  </ul>
+  </li>
+  <li>In another terminal window, use Create React App to scaffold out the front-end
+  <ul>
+  <li><code>create-react-app frontend</code></li>
+  <li><code>cd frontend</code></li>
+  <li><code>npm start</code></li>
+  </ul>
+  </li>
+  </ul>
+  <h2>API Server</h2>
+  <p>Information about the API server and how to use it can be found in its <a href="/quanquan2100/react-readable/blob/master/api-server/README.md">README file</a>.</p>
 </div>
 
           </div>
           <div className="comment">
-            <div className="comment-add" title="添加评论">
-              <IconComment size="30"/>
-            </div>
             <ul className="comment-list">
               <li className="comment-item">
                 <div className="comment-body">
@@ -126,7 +125,11 @@ class App extends Component {
                 </div>
               </li>
             </ul>
+            <div className="comment-add" title="添加评论">
+              <IconComment size="30"/>
+            </div>
           </div>
+          <div className="like-btn"><IconLike size="30" /> 点击投票</div>
         </div>
 
         <footer>made by quanquan, <a href="https://github.com/quanquan2100/react-readable" target="_blank">view in github <IconGithub /></a></footer>

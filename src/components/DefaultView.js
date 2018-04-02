@@ -42,8 +42,6 @@ class DefaultView extends React.Component {
         </div>
         <div className="column-right">
 
-          
-
           <div className="breadcrumbs">
             <div className="btn-group">
               <div className="btn"><IconTime /> 日期优先</div>

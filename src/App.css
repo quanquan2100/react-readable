@@ -195,12 +195,16 @@ footer {
 }
 
 
+
+
 /********* detail ************/
 
 .detail {
   margin: 30px auto;
   max-width: 1000px;
 }
+
+
 
 
 /**************/
@@ -263,16 +267,57 @@ footer {
 
 select {
   display: block;
-    width: 100%;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0;
-    -webkit-appearance: none;
-    height: calc(2.25rem + 2px);
-    margin: 20px 0;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0;
+  -webkit-appearance: none;
+  height: calc(2.25rem + 2px);
+  margin: 20px 0;
+}
+
+
+
+/***************/
+
+.like-btn {
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  bottom: 100px;
+  height: 60px;
+  font-size: 17px;
+  line-height: 30px;
+  padding: 15px;
+  border-top-left-radius: 35px;
+  border-bottom-left-radius: 35px;
+  color: #19ba9b;
+  width: 150px;
+  white-space: nowrap;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .3);
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.like-btn:hover,
+.like-btn.active {
+  color: #fff;
+  background-color: #19ba9b;
+}
+
+
+.post-operate {
+  color: #19ba9b;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.post-operate:hover {
+  color: #fff;
+  background-color: #19ba9b;
 }

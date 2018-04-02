@@ -1,19 +1,24 @@
 .comment {
   color: #555;
+  margin-top: 50px;
 }
+
 .comment-add {
   margin: 50px auto 30px;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    padding: 20px;
-    cursor: pointer;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  padding: 20px;
+  cursor: pointer;
+  transition: all .2s;
 }
+
 .comment-add:hover {
   background-color: #19ba9b;
   color: #fff;
 }
+
 .comment-list {
   list-style: none;
   padding-left: 0;
@@ -48,6 +53,7 @@
   border: solid 1px #eee;
   border-radius: .25rem;
   cursor: pointer;
+  transition: all .2s;
 }
 
 .comment-tool>div:hover {
