@@ -108,7 +108,7 @@ class EditPostModal extends React.Component {
 function mapStateToProps (state) {
   // console.log("EditPostModal", state)
   return {
-    modalIsOpen: state.globalReducer.modalIsOpen
+    modalIsOpen: state.globalReducer.postModalOpen
   }
 }
 

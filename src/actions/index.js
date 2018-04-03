@@ -1,6 +1,6 @@
 export const OPEN_POST_MODAL = 'OPEN_POST_MODAL';
 export const CLOSE_POST_MODAL = 'CLOSE_POST_MODAL';
-export const OPEN_COMMENT_MODAL = 'CLOSE_COMMENT_MODAL';
+export const OPEN_COMMENT_MODAL = 'OPEN_COMMENT_MODAL';
 export const CLOSE_COMMENT_MODAL = 'CLOSE_COMMENT_MODAL';
 
 export const openPostModal = () => ({

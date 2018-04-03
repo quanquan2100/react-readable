@@ -11,7 +11,8 @@ const globalReducerState = {
   postModalOpen: false,
   commentModalOpen: false,
   category: "all",
-  post: 123
+  editPostId: 123,
+  editCommentId: 123
 }
 
 function globalReducer(state = globalReducerState, action) {

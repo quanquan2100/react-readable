@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+// import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 // import icon
@@ -10,15 +11,15 @@ import IconAdd from "react-icons/lib/md/add"
 import IconArrowRight from "react-icons/lib/md/keyboard-arrow-right"
 import IconTag from "react-icons/lib/md/local-offer"
 import IconTime from "react-icons/lib/md/schedule"
-import IconGithub from "react-icons/lib/fa/github"
+// import IconGithub from "react-icons/lib/fa/github"
 
 // import action creater
 import { openPostModal } from '../actions'
 
 class DefaultView extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     const { newPost } = this.props;

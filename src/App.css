@@ -335,3 +335,10 @@ select {
   color: #fff;
   background-color: #19ba9b;
 }
+
+.input-textarea {
+  padding: .8rem 1rem .6rem;
+  border-radius: 0 ;
+  border: 1px solid #ced4da;
+  width: 100%;
+}
