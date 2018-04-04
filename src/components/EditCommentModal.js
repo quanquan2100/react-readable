@@ -2,18 +2,8 @@ import React from 'react';
 import Modal from "react-modal"
 import { connect } from 'react-redux';
 
-// import IconComment from "react-icons/lib/md/comment"
 import IconAccount from "react-icons/lib/md/perm-identity"
-// import IconLike from "react-icons/lib/md/favorite-border"
-// import IconAdd from "react-icons/lib/md/add"
-// import IconArrowRight from "react-icons/lib/md/keyboard-arrow-right"
-// import IconTag from "react-icons/lib/md/local-offer"
-// import IconTime from "react-icons/lib/md/schedule"
 import IconTitle from "react-icons/lib/md/toc"
-// import IconGithub from "react-icons/lib/fa/github"
-// import IconDelete from "react-icons/lib/md/delete"
-// import IconEdit from "react-icons/lib/md/edit"
-// import IconBack from "react-icons/lib/md/arrow-back"
 
 
 // import action creater
@@ -40,13 +30,45 @@ const customStyles = {
 class EditCommentModal extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      // value: RichTextEditor.createEmptyValue()
+      body: "",
+      author: ""
     };
+
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+  }
+
+  afterOpenModal() {
+    if (this.props.modalState === "new") {
+      this.setState({
+        body: "",
+        author: ""
+      });
+    } else {
+      const { currentCommentId, commentList } = this.props;
+      let commentData = {};
+      commentList.forEach((comment) => {
+        if (comment.id === currentCommentId) {
+          commentData.body = comment.body;
+          commentData.author = comment.author;
+        }
+      });
+      this.setState({ ...commentData });
+    }
+  }
+
+  updateAuthor = (author) => {
+    this.setState({ author })
+  }
+
+  updateBody = (body) => {
+    this.setState({ body })
   }
 
   render() {
-    const { modalIsOpen, close } = this.props;
+    const { modalIsOpen, close, modalState } = this.props;
+    const { author, body } = this.state;
     return (
       <Modal
         isOpen={modalIsOpen}
@@ -58,26 +80,24 @@ class EditCommentModal extends React.Component {
       >
         <h1>编辑评论</h1>
         <div className="input-text">
-          <div className="input-text-icon"><IconTitle/></div>
-          <input className="input-text-input" type="text" placeholder="请输入标题"/>
-        </div>
-        <div className="input-text">
           <div className="input-text-icon"><IconAccount/></div>
-          <input className="input-text-input" type="text" placeholder="请输入作者"/>
+          <input className="input-text-input" type="text" placeholder="请输入作者" disabled={modalState !== "new"} value={author} onChange={(e) => this.updateAuthor(e.target.value)} />
         </div>
-        <textarea className="input-textarea" rows="6"/>
+        <textarea className="input-textarea" rows="6" value={body} onChange={(e) => this.updateBody(e.target.value)} />
         <div style={{textAlign: "center"}}>
-          <div className="btn">确认创建</div>
+          <div className="modal-btn">确认</div>
         </div>
       </Modal>
     );
   }
 }
 
-function mapStateToProps (state) {
-  // console.log("EditPostModal", state)
+function mapStateToProps ({ globalReducer, categoryReducer, postReducer, commentReducer }) {
   return {
-    modalIsOpen: state.globalReducer.commentModalOpen
+    modalIsOpen: globalReducer.commentModalOpen,
+    modalState: globalReducer.modalState,
+    currentCommentId: globalReducer.currentCommentId,
+    commentList: commentReducer.commentList
   }
 }
 

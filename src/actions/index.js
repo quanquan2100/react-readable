@@ -9,6 +9,7 @@ export const CHOOSE_CATEGORY = "CHOOSE_CATEGORY";
 export const CHANGE_ORDER = "CHANGE_ORDER";
 export const SET_CURRENT_POST_ID = "SET_CURRENT_POST_ID";
 export const SET_CURRENT_COMMENT_ID = "SET_CURRENT_COMMENT_ID";
+export const SET_EDITING_STATE = "SET_EDITING_STATE";
 
 export const openPostModal = () => ({
   type: OPEN_POST_MODAL
@@ -45,6 +46,11 @@ export const setCurrentCommentId = (id) => ({
   id
 })
 
+export const setEditingState = (state) => ({
+  type: SET_EDITING_STATE,
+  state
+})
+
 /**
  * 类别相关 action
  */
@@ -75,7 +81,7 @@ export const getPost = (post) => ({
  * Comment 相关 action
  */
 export const SET_COMMENT_LIST = "SET_COMMENT_LIST";
-export const GET_COMMENT = "GET_COMMENT_LIST";
+export const GET_COMMENT = "GET_COMMENT";
 
 export const setCommentList = (commentList) => ({
   type: SET_COMMENT_LIST,

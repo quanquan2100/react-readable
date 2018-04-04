@@ -14,7 +14,7 @@ import IconTime from "react-icons/lib/md/schedule"
 // import IconGithub from "react-icons/lib/fa/github"
 
 // import action creater
-import { openPostModal, chooseCategory, changeOrder } from '../actions'
+import { openPostModal, chooseCategory, changeOrder, setEditingState } from '../actions'
 
 
 import Categories from "./Categories"
@@ -65,7 +65,10 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return {
     categoryChange: (category) => dispatch(chooseCategory(category)),
-    openPostModal: () => dispatch(openPostModal()),
+    openPostModal: () => {
+      dispatch(setEditingState("new"));
+      dispatch(openPostModal());
+    },
     chOrder: () => dispatch(changeOrder())
   }
 }

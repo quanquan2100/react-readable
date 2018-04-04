@@ -198,12 +198,14 @@ footer {
 
 
 
+
 /********* detail ************/
 
 .detail {
   margin: 30px auto;
   max-width: 1000px;
 }
+
 
 
 
@@ -284,6 +286,7 @@ select {
 
 
 
+
 /***************/
 
 .like-btn {
@@ -339,7 +342,31 @@ select {
 
 .input-textarea {
   padding: .8rem 1rem .6rem;
-  border-radius: 0 ;
+  border-radius: 0;
   border: 1px solid #ced4da;
   width: 100%;
+}
+
+
+/**********/
+
+.modal-btn {
+  color: #19ba9b;
+  border: 1px solid #19ba9b;
+  border-radius: 0;
+  margin: 1rem 0 1.5rem;
+  padding: .5rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.modal-btn:hover {
+  color: #fff;
+  background-color: #19ba9b;
+}
+
+[disabled] {
+  cursor: not-allowed;
 }

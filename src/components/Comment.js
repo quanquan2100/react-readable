@@ -5,7 +5,7 @@ import IconComment from "react-icons/lib/md/comment"
 import IconDelete from "react-icons/lib/md/delete"
 import IconEdit from "react-icons/lib/md/edit"
 
-import { openCommentModal, setCurrentCommentId } from '../actions'
+import { openCommentModal, setCurrentCommentId, setEditingState } from '../actions'
 import { formatDate } from "../util/util"
 
 
@@ -55,8 +55,15 @@ function mapStateToProps ({ globalReducer, commentReducer } = {}) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    addComment: () => {dispatch(openCommentModal())},
-    editComment: () => {},
+    addComment: () => {
+      dispatch(setEditingState("new"));
+      dispatch(openCommentModal());
+    },
+    editComment: (id) => {
+      dispatch(setCurrentCommentId(id))
+      dispatch(setEditingState("edit"));
+      dispatch(openCommentModal());
+    },
     delComment: () => {},
 
   }

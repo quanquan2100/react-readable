@@ -30,7 +30,7 @@ import IconGithub from "react-icons/lib/fa/github"
 
 // import action creater
 // import { openPostModal, openCommentModal } from './actions'
-import { chooseCategory, getCategories_a, getPostList_a } from './actions'
+import { getCategories_a, getPostList_a } from './actions'
 import  * as readableAPI from './readableAPI'
 
 
@@ -53,9 +53,6 @@ class App extends Component {
 
 
   render() {
-    // console.log(this.props)
-    const { categoryChange } = this.props;
-    // console.log("this.props.getPostes();", this.props.getPostes)
     return (
       <div className="App">
         <header className="">
@@ -71,7 +68,6 @@ class App extends Component {
         }} />
 
         <Route path="/" exact render={({ match }) => {
-          // categoryChange("all");
           return (<DefaultView categoryId="all" />);
         }} />
         
@@ -90,7 +86,6 @@ function mapStateToProps ({ globalReducer: { category } } = {}) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    categoryChange: (category) => dispatch(chooseCategory(category)),
     getCtgry: () => (dispatch((dispatch, getState) => (
       readableAPI
         .getCategories()

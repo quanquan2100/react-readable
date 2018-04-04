@@ -8,13 +8,13 @@ import {
   GET_CATEGORIES,
   GET_POST_LIST,
   GET_POST,
-  GET_COMMENT_LIST,
   GET_COMMENT,
   CHOOSE_CATEGORY,
   CHANGE_ORDER,
   SET_CURRENT_POST_ID,
   SET_CURRENT_COMMENT_ID,
-  SET_COMMENT_LIST
+  SET_COMMENT_LIST,
+  SET_EDITING_STATE
 } from '../actions'
 
 const globalReducerState = {
@@ -23,7 +23,8 @@ const globalReducerState = {
   category: "all",
   currentPostId: "",
   currentCommentId: "",
-  order: "vote"
+  order: "vote",
+  modalState: "new"
 }
 
 function globalReducer(state = globalReducerState, action) {
@@ -73,6 +74,11 @@ function globalReducer(state = globalReducerState, action) {
       return {
         ...state,
         currentCommentId: action.id
+      }
+    case SET_EDITING_STATE:
+      return {
+        ...state,
+        modalState: action.state
       }
     default:
       return state;

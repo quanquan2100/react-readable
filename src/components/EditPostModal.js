@@ -30,43 +30,58 @@ class EditPostModal extends React.Component {
     super(props);
 
     this.state = {
-      value: RichTextEditor.createEmptyValue()
+      body: RichTextEditor.createEmptyValue(),
+      title: "",
+      author: "",
+      category: ""
     };
-
-    this.openModal = this.openModal.bind(this);
+    // this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
-    // this.closePostModal = this.closePostModal.bind(this);
-  }
-
-  openModal() {
-    this.setState({
-      value: RichTextEditor.createEmptyValue()
-    });
   }
 
   afterOpenModal() {
+    if (this.props.modalState === "new") {
+      this.setState({
+        body: RichTextEditor.createEmptyValue(),
+        title: "",
+        author: "",
+        category: ""
+      });
+    } else {
+      const { currentPostId, postList } = this.props;
+      let postData = {};
+      postList.forEach((post) => {
+        if (post.id === currentPostId) {
+          postData.body = RichTextEditor.createValueFromString(post.body, 'html');
+          postData.title = post.title;
+          postData.author = post.author;
+          postData.category = post.category;
+        }
+      });
+      this.setState({ ...postData });
+    }
   }
 
-  // closePostModal() {
-  //   this.setState({modalIsOpen: false});
-  // }
+  onChange = (body) => {
+    this.setState({body});
+  }
 
-  onChange = (value) => {
-    this.setState({value});
-    console.log(value.toString('html'));
-    if (this.props.onChange) {
-      // Send the changes up to the parent component as an HTML string.
-      // This is here to demonstrate using `.toString()` but in a real app it
-      // would be better to avoid generating a string on each change.
-      this.props.onChange(
-        value.toString('html')
-      );
-    }
-  };
+  updateTitle = (title) => {
+    this.setState({ title })
+  }
+
+  updateAuthor = (author) => {
+    this.setState({ author })
+  }
+
+  updateCategory = (category) => {
+    this.setState({ category })
+  }
+
 
   render() {
-    const { modalIsOpen } = this.props;
-    const { close } = this.props;
+    const { modalIsOpen, modalState, close, categories } = this.props;
+    const { title, author, category } = this.state;
     return (
       <Modal
         isOpen={modalIsOpen}
@@ -79,36 +94,39 @@ class EditPostModal extends React.Component {
         <h1>编辑帖子</h1>
         <div className="input-text">
           <div className="input-text-icon"><IconTitle/></div>
-          <input className="input-text-input" type="text" placeholder="请输入标题"/>
+          <input className="input-text-input" type="text" placeholder="请输入标题" value={title} onChange={(e) => this.updateTitle(e.target.value)} />
         </div>
         <div className="input-text">
           <div className="input-text-icon"><IconAccount/></div>
-          <input className="input-text-input" type="text" placeholder="请输入作者"/>
+          <input className="input-text-input" type="text" placeholder="请输入作者" disabled={modalState !== "new"} value={author} onChange={(e) => this.updateAuthor(e.target.value)} />
         </div>
 
         <RichTextEditor
-          value={this.state.value}
+          value={this.state.body}
           onChange={this.onChange}
         />
 
-        <select>
-          <option default>请选择分类</option>
-          <option value ="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option>
+        <select disabled={modalState !== "new"} value={category} onChange={(e) => this.updateCategory(e.target.value)} >
+          <option default >请选择分类</option>
+          {
+            categories.map((category) => (<option value ={category.path} key={category.path} >{category.name}</option>))
+          }
         </select>
         <div style={{textAlign: "center"}}>
-          <div className="btn">确认创建</div>
+          <div className="modal-btn">确认</div>
         </div>
       </Modal>
     );
   }
 }
 
-function mapStateToProps (state) {
-  // console.log("EditPostModal", state)
+function mapStateToProps ({ globalReducer, categoryReducer, postReducer }) {
   return {
-    modalIsOpen: state.globalReducer.postModalOpen
+    modalIsOpen: globalReducer.postModalOpen,
+    modalState: globalReducer.modalState,
+    categories: categoryReducer.categories,
+    currentPostId: globalReducer.currentPostId,
+    postList: postReducer.postList
   }
 }
 

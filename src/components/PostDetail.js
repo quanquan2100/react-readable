@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import  * as readableAPI from '../readableAPI'
+import { Link } from 'react-router-dom';
 
 import IconComment from "react-icons/lib/md/comment"
 import IconAccount from "react-icons/lib/md/perm-identity"
@@ -16,7 +17,7 @@ import IconEdit from "react-icons/lib/md/edit"
 import IconBack from "react-icons/lib/md/arrow-back"
 
 // import action creater
-import { openPostModal, openCommentModal, setCurrentPostId, setCommentList } from '../actions'
+import { openPostModal, setCurrentPostId, setCommentList, setEditingState } from '../actions'
 import Comment from "./Comment"
 
 import { formatDate } from "../util/util"
@@ -31,12 +32,12 @@ class PostDetail extends React.Component {
   }
 
   render() {
-    const { editPost, delPost, votePost, currentPostId, postList } = this.props;
+    const { editPost, delPost, votePost, currentPostId, postList, category } = this.props;
     let post = {}
     postList.forEach((p) => (p.id === currentPostId ? post = p : ""))
     return (
         <div className="detail">
-          <div className="back"><IconBack /> 返回</div>
+          <Link className="back" to={category === "all" ? "/" : `/category/${category}`}><IconBack /> 返回</Link>
           <h2 className="article-title">{post.title}</h2>
           <div className="article-info">
             <div className=""><IconTime/> {formatDate(post.timestamp)}</div>
@@ -57,6 +58,7 @@ class PostDetail extends React.Component {
 function mapStateToProps ({ globalReducer, postReducer } = {}) {
   return {
     postList: postReducer.postList,
+    category: globalReducer.category,
     currentPostId: globalReducer.currentPostId
   }
 }
@@ -73,7 +75,10 @@ function mapDispatchToProps (dispatch) {
           })
       })
     },
-    editPost: () => {},
+    editPost: () => {
+      dispatch(setEditingState("edit"));
+      dispatch(openPostModal());
+    },
     delPost: () => {},
     votePost: () => {}
   }
