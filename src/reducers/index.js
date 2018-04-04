@@ -14,7 +14,9 @@ import {
   SET_CURRENT_COMMENT_ID,
   SET_COMMENT_LIST,
   SET_EDITING_STATE,
-  PUSH_POST
+  PUSH_POST,
+  UPDATE_COMMENT,
+  UPDATE_POST,
 } from '../actions'
 
 const globalReducerState = {
@@ -103,6 +105,13 @@ function postReducer(state = postState, action) {
         ...state,
         postList: postResult
       }
+    case UPDATE_POST:
+      const updateResult = state.postList.concat();
+      updateResult.forEach((post, index) => (post.id === action.post.id ? (updateResult[index] = action.post) : ""))
+      return {
+        ...state,
+        postList: updateResult
+      }
     default:
       return state;
   }
@@ -126,6 +135,13 @@ function commentReducer(state = commentState, action) {
       return {
         ...state,
         commentList: postResult
+      }
+    case UPDATE_COMMENT:
+      const updateResult = state.commentList.concat();
+      updateResult.forEach((comment, index) => (comment.id === action.comment.id ? (updateResult[index] = action.comment) : ""))
+      return {
+        ...state,
+        commentList: updateResult
       }
     default:
       return state;

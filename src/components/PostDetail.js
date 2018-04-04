@@ -31,7 +31,7 @@ class PostDetail extends React.Component {
     const { editPost, delPost, votePost, currentPostId, postList, category } = this.props;
     let post = {}
     postList.forEach((p) => (p.id === currentPostId ? post = p : ""))
-    console.log(post.body)
+    // console.log(post.body)
     return (
         <div className="detail">
           <Link className="back" to={category === "all" ? "/" : `/category/${category}`}><IconBack /> 返回</Link>

@@ -8,7 +8,7 @@ import  * as readableAPI from '../readableAPI'
 
 
 // import action creater
-import { closeCommentModal, pushComment } from '../actions'
+import { closeCommentModal, pushComment, updateComment } from '../actions'
 
 const customStyles = {
   overlay: {
@@ -33,6 +33,7 @@ class EditCommentModal extends React.Component {
     super(props);
 
     this.state = {
+      id: "",
       body: "",
       author: ""
     };
@@ -53,6 +54,7 @@ class EditCommentModal extends React.Component {
         if (comment.id === currentCommentId) {
           commentData.body = comment.body;
           commentData.author = comment.author;
+          commentData.id = comment.id;
         }
       });
       this.setState({ ...commentData });
@@ -68,8 +70,8 @@ class EditCommentModal extends React.Component {
   }
 
   render() {
-    const { modalIsOpen, close, modalState, createComment, currentPostId } = this.props;
-    const { author, body } = this.state;
+    const { modalIsOpen, close, modalState, createComment, currentPostId, editComment } = this.props;
+    const { author, body, id } = this.state;
     return (
       <Modal
         isOpen={modalIsOpen}
@@ -88,10 +90,14 @@ class EditCommentModal extends React.Component {
         <div style={{textAlign: "center"}}>
           <div className="modal-btn" onClick={() => {
             const comment = {};
-            comment.body = body.trim();
-            comment.author = author.trim();
-            comment.parentId = currentPostId;
-            createComment(comment);
+            if (modalState === "new") {
+              comment.body = body.trim();
+              comment.author = author.trim();
+              comment.parentId = currentPostId;
+              createComment(comment);
+            } else {
+              editComment(id, Date.now(), body.trim())
+            }
           }}>确认</div>
         </div>
       </Modal>
@@ -122,9 +128,20 @@ function mapDispatchToProps (dispatch) {
           .then((data) => {
             dispatch(pushComment(data));
             dispatch(closeCommentModal());
-            alert("评论成功");
+            // console.log("评论成功");
           })
       })
+    },
+    editComment: (id, timestamp, body) => {
+      dispatch((dispatch) => {
+        readableAPI
+          .editComment(id, timestamp, body)
+          .then((data) => {
+            dispatch(updateComment(data));
+            dispatch(closeCommentModal());
+            // console.log("编辑成功");
+          })
+      });
     }
   }
 }

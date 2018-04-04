@@ -66,6 +66,7 @@ export const getCategories_a = (categories) => ({
  */
 export const GET_POST_LIST = "GET_POST_LIST";
 export const PUSH_POST = "PUSH_POST";
+export const UPDATE_POST = "UPDATE_POST";
 
 export const getPostList_a = (postList) => ({
   type: GET_POST_LIST,
@@ -77,12 +78,18 @@ export const pushPost = (post) => ({
   post
 });
 
+export const updatePost = (post) => ({
+  type: UPDATE_POST,
+  post
+});
+
 
 /**
  * Comment 相关 action
  */
 export const SET_COMMENT_LIST = "SET_COMMENT_LIST";
 export const PUSH_COMMENT = "PUSH_COMMENT";
+export const UPDATE_COMMENT = "UPDATE_COMMENT";
 
 export const setCommentList = (commentList) => ({
   type: SET_COMMENT_LIST,
@@ -91,6 +98,11 @@ export const setCommentList = (commentList) => ({
 
 export const pushComment = (comment) => ({
   type: PUSH_COMMENT,
+  comment
+});
+
+export const updateComment = (comment) => ({
+  type: UPDATE_COMMENT,
   comment
 });
 

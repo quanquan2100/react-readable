@@ -99,7 +99,7 @@ export const editPost = (id, title, body) =>
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ title, body })
-  }).then(res => console.log(res))
+  }).then(res => res.json())
 
 export const editComment = (id, timestamp, body) =>
   fetch(`${api}/comments/${id}`, {
@@ -109,6 +109,7 @@ export const editComment = (id, timestamp, body) =>
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ timestamp, body })
-  }).then(res => console.log(res))
+  }).then(res => res.json())
+
 
 

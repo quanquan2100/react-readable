@@ -7,7 +7,7 @@ import IconAccount from "react-icons/lib/md/perm-identity"
 import  * as readableAPI from '../readableAPI'
 
 // import action creater
-import { closePostModal, pushPost } from '../actions'
+import { closePostModal, pushPost, updatePost } from '../actions'
 
 const customStyles = {
   overlay: {
@@ -81,7 +81,7 @@ class EditPostModal extends React.Component {
 
 
   render() {
-    const { modalIsOpen, modalState, close, categories, createPost } = this.props;
+    const { modalIsOpen, modalState, close, categories, createPost, currentPostId, editPost } = this.props;
     const { title, author, category, body } = this.state;
     return (
       <Modal
@@ -116,11 +116,15 @@ class EditPostModal extends React.Component {
         <div style={{textAlign: "center"}}>
           <div className="modal-btn" onClick={() => {
             const post = {};
-            post.body = body.toString("html");
-            post.title = title.trim();
-            post.author = author.trim();
-            post.category = category;
-            createPost(post)
+            if (modalState === "new") {
+              post.body = body.toString("html");
+              post.title = title.trim();
+              post.author = author.trim();
+              post.category = category;
+              createPost(post)
+            } else {
+              editPost(currentPostId, title.trim(), body.toString("html"));
+            }
           }}>确认</div>
         </div>
       </Modal>
@@ -151,9 +155,20 @@ function mapDispatchToProps (dispatch) {
           .then((data) => {
             dispatch(pushPost(data));
             dispatch(closePostModal());
-            alert("创建成功");
+            // alert("创建成功");
           })
       })
+    },
+    editPost: (id, timestamp, body) => {
+      dispatch((dispatch) => {
+        readableAPI
+          .editPost(id, timestamp, body)
+          .then((data) => {
+            dispatch(updatePost(data));
+            dispatch(closePostModal());
+            // console.log("编辑成功");
+          })
+      });
     }
   }
 }
