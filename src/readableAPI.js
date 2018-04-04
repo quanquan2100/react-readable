@@ -14,27 +14,33 @@ const headers = {
 
 export const getCategories = () =>
   fetch(`${api}/categories`, { headers })
-    .then(res => console.log(res))
+    .then(res => res.json())
+    .then(data => (data))
 
 export const getCategoryPost = (category) =>
   fetch(`${api}/${category}/posts`, { headers })
-    .then(res => console.log(res))
+    .then(res => res.json())
+    .then(data => console.log(data))
 
 export const getAllPosts = () =>
   fetch(`${api}/posts`, { headers })
-    .then(res => console.log(res))
+    .then(res => res.json())
+    .then(data => (data))
 
 export const getPost = (id) =>
   fetch(`${api}/posts/${id}`, { headers })
-    .then(res => console.log(res))
+    .then(res => res.json())
+    .then(data => console.log(data))
 
 export const getPostComment = (id) =>
   fetch(`${api}/posts/${id}/comments`, { headers })
-    .then(res => console.log(res))
+    .then(res => res.json())
+    .then(data => console.log(data))
 
 export const getComment = (id) =>
   fetch(`${api}/comments/${id}`, { headers })
-    .then(res => console.log(res))
+    .then(res => res.json())
+    .then(data => console.log(data))
 
 
 
@@ -49,7 +55,7 @@ export const addNewPost = (post) =>
   }).then(res => res.json())
 
 export const votePost = (id, vote) =>
-  fetch(`${api}/books/${book.id}`, {
+  fetch(`${api}/posts/${id}`, {
     method: 'POST',
     headers: {
       ...headers

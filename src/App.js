@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './App.css';
 import './style/markdown.css';
 import './style/comment.css';
@@ -10,6 +11,7 @@ import { connect } from 'react-redux';
 // import { Provider, connect } from 'react-redux';
 // import { Provider } from 'react-redux';
 // import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 
 // import IconComment from "react-icons/lib/md/comment"
 // import IconAccount from "react-icons/lib/md/perm-identity"
@@ -28,6 +30,10 @@ import IconGithub from "react-icons/lib/fa/github"
 
 // import action creater
 // import { openPostModal, openCommentModal } from './actions'
+import { chooseCategory, getCategories_a, getPostList_a } from './actions'
+import  * as readableAPI from './readableAPI'
+
+
 
 // import component
 import EditPostModal from "./components/EditPostModal"
@@ -35,41 +41,71 @@ import DefaultView from "./components/DefaultView"
 import PostDetail from "./components/PostDetail"
 import EditCommentModal from "./components/EditCommentModal"
 
-
 class App extends Component {
   // constructor() {
   //   super();
   // }
 
+  componentDidMount() {
+    this.props.getPostes();
+    this.props.getCtgry();
+  }
+
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
+    const { categoryChange } = this.props;
+    // console.log("this.props.getPostes();", this.props.getPostes)
     return (
       <div className="App">
         <header className="">
           <h1 className="">React Project 2 - Readable</h1>
         </header>
-        <PostDetail />
+
+        <Route path="/post/:id" render={({ match }) => {
+          // categoryChange(match.params.id);
+          return (<PostDetail />);
+        }} />
+
+        <Route path="/category/:id" render={({ match }) => {
+          return (<DefaultView categoryId={match.params.id} />);
+        }} />
+
+        <Route path="/" exact render={({ match }) => {
+          // categoryChange("all");
+          return (<DefaultView categoryId="all" />);
+        }} />
+        
         <EditPostModal />
         <EditCommentModal />
-        <footer>made by quanquan, <a href="https://github.com/quanquan2100/react-readable" target="_blank">view in github <IconGithub /></a></footer>
+
+        <footer>made by quanquan, <a href="https://github.com/quanquan2100/react-readable" target="_blank" rel="noopener noreferrer">view in github <IconGithub /></a></footer>
       </div>
     );
   }
 }
 
 function mapStateToProps ({ globalReducer: { category } } = {}) {
-  return {
-    category
-  }
+  return {}
 }
 
 function mapDispatchToProps (dispatch) {
   return {
+    categoryChange: (category) => dispatch(chooseCategory(category)),
+    getCtgry: () => (dispatch((dispatch, getState) => (
+      readableAPI
+        .getCategories()
+        .then(data => dispatch(getCategories_a(data.categories)))
+    ))),
+    getPostes: () => (dispatch((dispatch, getState) => (
+      readableAPI
+        .getAllPosts()
+        .then(data => dispatch(getPostList_a(data)))
+    )))
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(App));

@@ -4,15 +4,23 @@ import {
   OPEN_POST_MODAL,
   CLOSE_POST_MODAL,
   OPEN_COMMENT_MODAL,
-  CLOSE_COMMENT_MODAL
+  CLOSE_COMMENT_MODAL,
+  GET_CATEGORIES,
+  GET_POST_LIST,
+  GET_POST,
+  GET_COMMENT_LIST,
+  GET_COMMENT,
+  CHOOSE_CATEGORY,
+  CHANGE_ORDER
 } from '../actions'
 
 const globalReducerState = {
   postModalOpen: false,
   commentModalOpen: false,
   category: "all",
-  editPostId: 123,
-  editCommentId: 123
+  currentPostId: 123,
+  currentCommentId: 123,
+  order: "vote"
 }
 
 function globalReducer(state = globalReducerState, action) {
@@ -37,48 +45,87 @@ function globalReducer(state = globalReducerState, action) {
         ...state,
         commentModalOpen: false
       }
+    case CHOOSE_CATEGORY:
+      return {
+        ...state,
+        category: action.category
+      }
+    case CHANGE_ORDER:
+      let newOrder;
+      if (state.order === "time") {
+        newOrder = "vote";
+      } else {
+        newOrder = "time"
+      }
+      return {
+        ...state,
+        order: newOrder
+      }
     default:
       return state;
   }
 }
 
 const postState = {
-  postList: [{
-    id: 123,
-    title: "标题",
-    author: "灰仔",
-    time: "2018-03-21",
-    comment: [1, 2, 3],
-    like: 15,
-    ctx: `<p>This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.</p> <p>This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.</p> <h2>Start Developing</h2> <p>To get started developing right away:</p> <ul> <li>Install and start the API server <ul> <li><code>cd api-server</code></li> <li><code>npm install</code></li> <li><code>node server</code></li> </ul> </li> <li>In another terminal window, use Create React App to scaffold out the front-end <ul> <li><code>create-react-app frontend</code></li> <li><code>cd frontend</code></li> <li><code>npm start</code></li> </ul> </li> </ul> <h2>API Server</h2> <p>Information about the API server and how to use it can be found in its <a href="/quanquan2100/react-readable/blob/master/api-server/README.md">README file</a>.</p>`
-  }]
+  postList: []
 }
 
-function post(state = postState, action) {
+function postReducer(state = postState, action) {
   switch (action.type) {
-    default: return state;
+    case GET_POST_LIST:
+      return {
+        ...state,
+        postList: action.postList
+      }
+    case GET_POST:
+      return {
+        ...state
+      }
+    default:
+      return state;
   }
 }
 
 const commentState = {}
 
-function comment(state = commentState, action) {
+function commentReducer(state = commentState, action) {
   switch (action.type) {
-    default: return state;
+    case GET_COMMENT_LIST:
+      return {
+        ...state
+      }
+    case GET_COMMENT:
+      return {
+        ...state
+      }
+    default:
+      return state;
   }
 }
 
-const categoryState = {}
+/**
+ * 分类相关 reducer
+ */
 
-function category(state = categoryState, action) {
+const categoryState = {
+  categories: []
+}
+
+function categoryReducer(state = categoryState, action) {
   switch (action.type) {
-    default: return state;
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        categories: action.categories
+      };
+    default:
+      return state;
   }
 }
 
 export default combineReducers({
   globalReducer,
-  post,
-  comment,
-  category
+  postReducer,
+  commentReducer,
+  categoryReducer
 });
