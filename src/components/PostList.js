@@ -11,21 +11,7 @@ import { Link } from 'react-router-dom';
 import IconComment from "react-icons/lib/md/comment"
 import IconAccount from "react-icons/lib/md/perm-identity"
 import IconLike from "react-icons/lib/md/favorite-border"
-
-function formatDate(date) {
-  var d = new Date(date),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear(),
-    hour = d.getHours(),
-    minutes = d.getMinutes();
-
-
-  if (month.length < 2) month = '0' + month;
-  if (day.length < 2) day = '0' + day;
-
-  return `${year}-${month}-${day} ${hour}:${minutes}`;
-}
+import { formatDate } from "../util/util"
 
 class PostList extends React.Component {
   // constructor(props) {

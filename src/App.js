@@ -63,8 +63,7 @@ class App extends Component {
         </header>
 
         <Route path="/post/:id" render={({ match }) => {
-          // categoryChange(match.params.id);
-          return (<PostDetail />);
+          return (<PostDetail postId={match.params.id} />);
         }} />
 
         <Route path="/category/:id" render={({ match }) => {

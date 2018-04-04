@@ -7,6 +7,8 @@ export const OPEN_COMMENT_MODAL = "OPEN_COMMENT_MODAL";
 export const CLOSE_COMMENT_MODAL = "CLOSE_COMMENT_MODAL";
 export const CHOOSE_CATEGORY = "CHOOSE_CATEGORY";
 export const CHANGE_ORDER = "CHANGE_ORDER";
+export const SET_CURRENT_POST_ID = "SET_CURRENT_POST_ID";
+export const SET_CURRENT_COMMENT_ID = "SET_CURRENT_COMMENT_ID";
 
 export const openPostModal = () => ({
   type: OPEN_POST_MODAL
@@ -31,6 +33,16 @@ export const chooseCategory = (category) => ({
 
 export const changeOrder = () => ({
   type: CHANGE_ORDER
+})
+
+export const setCurrentPostId = (id) => ({
+  type: SET_CURRENT_POST_ID,
+  id
+})
+
+export const setCurrentCommentId = (id) => ({
+  type: SET_CURRENT_COMMENT_ID,
+  id
 })
 
 /**
@@ -62,11 +74,11 @@ export const getPost = (post) => ({
 /**
  * Comment 相关 action
  */
-export const GET_COMMENT_LIST = "GET_COMMENT_LIST";
+export const SET_COMMENT_LIST = "SET_COMMENT_LIST";
 export const GET_COMMENT = "GET_COMMENT_LIST";
 
-export const getCommentList = (commentList) => ({
-  type: GET_COMMENT_LIST,
+export const setCommentList = (commentList) => ({
+  type: SET_COMMENT_LIST,
   commentList
 });
 

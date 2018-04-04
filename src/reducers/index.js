@@ -11,15 +11,18 @@ import {
   GET_COMMENT_LIST,
   GET_COMMENT,
   CHOOSE_CATEGORY,
-  CHANGE_ORDER
+  CHANGE_ORDER,
+  SET_CURRENT_POST_ID,
+  SET_CURRENT_COMMENT_ID,
+  SET_COMMENT_LIST
 } from '../actions'
 
 const globalReducerState = {
   postModalOpen: false,
   commentModalOpen: false,
   category: "all",
-  currentPostId: 123,
-  currentCommentId: 123,
+  currentPostId: "",
+  currentCommentId: "",
   order: "vote"
 }
 
@@ -61,6 +64,16 @@ function globalReducer(state = globalReducerState, action) {
         ...state,
         order: newOrder
       }
+    case SET_CURRENT_POST_ID:
+      return {
+        ...state,
+        currentPostId: action.id
+      }
+    case SET_CURRENT_COMMENT_ID:
+      return {
+        ...state,
+        currentCommentId: action.id
+      }
     default:
       return state;
   }
@@ -86,13 +99,16 @@ function postReducer(state = postState, action) {
   }
 }
 
-const commentState = {}
+const commentState = {
+  commentList: []
+}
 
 function commentReducer(state = commentState, action) {
   switch (action.type) {
-    case GET_COMMENT_LIST:
+    case SET_COMMENT_LIST:
       return {
-        ...state
+        ...state,
+        commentList: action.commentList
       }
     case GET_COMMENT:
       return {
