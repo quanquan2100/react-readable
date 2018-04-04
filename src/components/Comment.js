@@ -22,7 +22,7 @@ class Comment extends React.Component {
       <div className="comment">
         <ul className="comment-list">
           {
-            commentes.map((comment) => (
+            commentList.map((comment) => (
               <li className="comment-item" key={comment.id}>
                 <div className="comment-body">
                   <div className="comment-tool">

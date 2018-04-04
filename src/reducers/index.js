@@ -7,14 +7,14 @@ import {
   CLOSE_COMMENT_MODAL,
   GET_CATEGORIES,
   GET_POST_LIST,
-  GET_POST,
-  GET_COMMENT,
+  PUSH_COMMENT,
   CHOOSE_CATEGORY,
   CHANGE_ORDER,
   SET_CURRENT_POST_ID,
   SET_CURRENT_COMMENT_ID,
   SET_COMMENT_LIST,
-  SET_EDITING_STATE
+  SET_EDITING_STATE,
+  PUSH_POST
 } from '../actions'
 
 const globalReducerState = {
@@ -96,9 +96,12 @@ function postReducer(state = postState, action) {
         ...state,
         postList: action.postList
       }
-    case GET_POST:
+    case PUSH_POST:
+      const postResult = state.postList.concat();
+      postResult.push(action.post);
       return {
-        ...state
+        ...state,
+        postList: postResult
       }
     default:
       return state;
@@ -116,9 +119,13 @@ function commentReducer(state = commentState, action) {
         ...state,
         commentList: action.commentList
       }
-    case GET_COMMENT:
+    case PUSH_COMMENT:
+      const postResult = state.commentList.concat();
+      postResult.push(action.comment);
+      // state.commentList.push(action.comment);
       return {
-        ...state
+        ...state,
+        commentList: postResult
       }
     default:
       return state;

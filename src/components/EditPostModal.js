@@ -4,9 +4,10 @@ import Modal from "react-modal"
 import IconTitle from "react-icons/lib/md/toc"
 import { connect } from 'react-redux';
 import IconAccount from "react-icons/lib/md/perm-identity"
+import  * as readableAPI from '../readableAPI'
 
 // import action creater
-import { closePostModal } from '../actions'
+import { closePostModal, pushPost } from '../actions'
 
 const customStyles = {
   overlay: {
@@ -80,8 +81,8 @@ class EditPostModal extends React.Component {
 
 
   render() {
-    const { modalIsOpen, modalState, close, categories } = this.props;
-    const { title, author, category } = this.state;
+    const { modalIsOpen, modalState, close, categories, createPost } = this.props;
+    const { title, author, category, body } = this.state;
     return (
       <Modal
         isOpen={modalIsOpen}
@@ -102,7 +103,7 @@ class EditPostModal extends React.Component {
         </div>
 
         <RichTextEditor
-          value={this.state.body}
+          value={body}
           onChange={this.onChange}
         />
 
@@ -113,7 +114,14 @@ class EditPostModal extends React.Component {
           }
         </select>
         <div style={{textAlign: "center"}}>
-          <div className="modal-btn">确认</div>
+          <div className="modal-btn" onClick={() => {
+            const post = {};
+            post.body = body.toString("html");
+            post.title = title.trim();
+            post.author = author.trim();
+            post.category = category;
+            createPost(post)
+          }}>确认</div>
         </div>
       </Modal>
     );
@@ -133,6 +141,39 @@ function mapStateToProps ({ globalReducer, categoryReducer, postReducer }) {
 function mapDispatchToProps (dispatch) {
   return {
     close: () => dispatch(closePostModal()),
+    createPost: (post) => {
+      if (!checkFormData(post)) {
+        return;
+      }
+      dispatch((dispatch) => {
+        readableAPI
+          .addNewPost(post)
+          .then((data) => {
+            dispatch(pushPost(data));
+            dispatch(closePostModal());
+            alert("创建成功");
+          })
+      })
+    }
+  }
+}
+
+function checkFormData(post) {
+  switch (true) {
+    case (post.title.length === 0):
+      alert("标题不能为空");
+      return false;
+    case (post.author.length === 0):
+      alert("作者不能为空");
+      return false;
+    case (post.body.length === 0):
+      alert("内容不能为空");
+      return false;
+    case (post.category === ""):
+      alert("需选择分类");
+      return false;
+    default:
+      return true;
   }
 }
 

@@ -199,6 +199,7 @@ footer {
 
 
 
+
 /********* detail ************/
 
 .detail {
@@ -210,11 +211,16 @@ footer {
 
 
 
+
 /**************/
 
 .public-DraftEditor-content {
   min-height: 250px;
   max-height: 250px;
+}
+
+.detail-ctx .public-DraftEditor-content {
+  max-height: none;
 }
 
 .input-text {
@@ -287,6 +293,7 @@ select {
 
 
 
+
 /***************/
 
 .like-btn {
@@ -348,6 +355,7 @@ select {
 }
 
 
+
 /**********/
 
 .modal-btn {
@@ -369,4 +377,49 @@ select {
 
 [disabled] {
   cursor: not-allowed;
+}
+
+
+
+/**********/
+
+.comfirm-ctx {
+  text-align: center;
+}
+
+.comfirm-btns {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.comfirm-btns>div {
+  border-radius: 0;
+  padding: .5rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-block;
+  transition: all .2s;
+}
+
+.comfirm-btns-n {
+  color: #19ba9b;
+  border: 1px solid #19ba9b;
+  margin-right: 10px;
+}
+
+.comfirm-btns-n:hover {
+  color: #fff;
+  background-color: #19ba9b;
+}
+
+.comfirm-btns-y {
+  color: #e8673c;
+  border: 1px solid #e8673c;
+  margin-left: 10px;
+}
+
+.comfirm-btns-y:hover {
+  color: #fff;
+  background-color: #e8673c;
 }

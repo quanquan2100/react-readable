@@ -1,3 +1,4 @@
+import uuid from "uuid/v4"
 
 const api = "http://localhost:3001"
 
@@ -44,8 +45,10 @@ export const getComment = (id) =>
 
 
 
-export const addNewPost = (post) =>
-  fetch(`${api}/posts`, {
+export const addNewPost = (post) =>{
+  post.timestamp = Date.now();
+  post.id = uuid();
+  return fetch(`${api}/posts`, {
     method: 'POST',
     headers: {
       ...headers,
@@ -53,6 +56,7 @@ export const addNewPost = (post) =>
     },
     body: JSON.stringify(post)
   }).then(res => res.json())
+}
 
 export const votePost = (id, vote) =>
   fetch(`${api}/posts/${id}`, {
@@ -63,8 +67,10 @@ export const votePost = (id, vote) =>
     body: vote
   }).then(res => res.json())
 
-export const addNewComment = (comment) =>
-  fetch(`${api}/comments`, {
+export const addNewComment = (comment) => {
+  comment.timestamp = Date.now();
+  comment.id = uuid();
+  return fetch(`${api}/comments`, {
     method: 'POST',
     headers: {
       ...headers,
@@ -72,6 +78,7 @@ export const addNewComment = (comment) =>
     },
     body: JSON.stringify(comment)
   }).then(res => res.json())
+}
 
 export const voteComment = (id, vote) =>
   fetch(`${api}/comments/${id}`, {

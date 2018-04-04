@@ -3,11 +3,12 @@ import Modal from "react-modal"
 import { connect } from 'react-redux';
 
 import IconAccount from "react-icons/lib/md/perm-identity"
-import IconTitle from "react-icons/lib/md/toc"
+import  * as readableAPI from '../readableAPI'
+// import IconTitle from "react-icons/lib/md/toc"
 
 
 // import action creater
-import { closeCommentModal } from '../actions'
+import { closeCommentModal, pushComment } from '../actions'
 
 const customStyles = {
   overlay: {
@@ -67,7 +68,7 @@ class EditCommentModal extends React.Component {
   }
 
   render() {
-    const { modalIsOpen, close, modalState } = this.props;
+    const { modalIsOpen, close, modalState, createComment, currentPostId } = this.props;
     const { author, body } = this.state;
     return (
       <Modal
@@ -85,7 +86,13 @@ class EditCommentModal extends React.Component {
         </div>
         <textarea className="input-textarea" rows="6" value={body} onChange={(e) => this.updateBody(e.target.value)} />
         <div style={{textAlign: "center"}}>
-          <div className="modal-btn">确认</div>
+          <div className="modal-btn" onClick={() => {
+            const comment = {};
+            comment.body = body.trim();
+            comment.author = author.trim();
+            comment.parentId = currentPostId;
+            createComment(comment);
+          }}>确认</div>
         </div>
       </Modal>
     );
@@ -97,13 +104,41 @@ function mapStateToProps ({ globalReducer, categoryReducer, postReducer, comment
     modalIsOpen: globalReducer.commentModalOpen,
     modalState: globalReducer.modalState,
     currentCommentId: globalReducer.currentCommentId,
-    commentList: commentReducer.commentList
+    commentList: commentReducer.commentList,
+    currentPostId: globalReducer.currentPostId
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     close: () => dispatch(closeCommentModal()),
+    createComment: (post) => {
+      if (!checkFormData(post)) {
+        return;
+      }
+      dispatch((dispatch) => {
+        readableAPI
+          .addNewComment(post)
+          .then((data) => {
+            dispatch(pushComment(data));
+            dispatch(closeCommentModal());
+            alert("评论成功");
+          })
+      })
+    }
+  }
+}
+
+function checkFormData(post) {
+  switch (true) {
+    case (post.author.length === 0):
+      alert("作者不能为空");
+      return false;
+    case (post.body.length === 0):
+      alert("内容不能为空");
+      return false;
+    default:
+      return true;
   }
 }
 
