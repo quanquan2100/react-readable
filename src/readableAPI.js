@@ -62,9 +62,10 @@ export const votePost = (id, vote) =>
   fetch(`${api}/posts/${id}`, {
     method: 'POST',
     headers: {
-      ...headers
+      ...headers,
+      'Content-Type': 'application/json'
     },
-    body: vote
+    body: JSON.stringify({option: vote})
   }).then(res => res.json())
 
 export const addNewComment = (comment) => {
@@ -86,7 +87,7 @@ export const voteComment = (id, vote) =>
     headers: {
       ...headers
     },
-    body: vote
+    body: JSON.stringify({option: vote})
   }).then(res => res.json())
 
 

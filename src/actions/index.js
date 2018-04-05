@@ -69,6 +69,7 @@ export const PUSH_POST = "PUSH_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const MODIFY_COMMENT_NUM = "MODIFY_COMMENT_NUM";
 export const DEL_POST = "DEL_POST";
+export const UPDATE_VOTE = "UPDATE_VOTE";
 
 export const getPostList_a = (postList) => ({
   type: GET_POST_LIST,
@@ -96,6 +97,11 @@ export const delPost = (id) => ({
   id
 });
 
+export const updateVote = (id, vote) => ({
+  type: UPDATE_VOTE,
+  id,
+  vote
+})
 
 /**
  * Comment 相关 action

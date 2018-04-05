@@ -20,6 +20,7 @@ import {
   MODIFY_COMMENT_NUM,
   DEL_POST,
   DEL_COMMENT,
+  UPDATE_VOTE,
 } from '../actions'
 
 const globalReducerState = {
@@ -131,6 +132,12 @@ function postReducer(state = postState, action) {
         ...state,
         postList: copy
       }
+    case UPDATE_VOTE:
+      copy = state.postList.map((post) => (post.id === action.id ? (post.voteScore += action.vote, post) : post));
+      return {
+        ...state,
+        postList: copy
+      }
     default:
       return state;
   }
@@ -151,7 +158,6 @@ function commentReducer(state = commentState, action) {
     case PUSH_COMMENT:
       const postResult = state.commentList.concat();
       postResult.push(action.comment);
-      // state.commentList.push(action.comment);
       return {
         ...state,
         commentList: postResult

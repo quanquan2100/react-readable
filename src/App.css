@@ -200,12 +200,14 @@ footer {
 
 
 
+
 /********* detail ************/
 
 .detail {
   margin: 30px auto;
   max-width: 1000px;
 }
+
 
 
 
@@ -294,33 +296,43 @@ select {
 
 
 
+
 /***************/
 
-.like-btn {
+.like-btn,
+.dislike-btn {
   position: fixed;
   z-index: 10;
   right: 0;
-  bottom: 100px;
+  bottom: 200px;
   height: 60px;
-  font-size: 17px;
+  font-size: 16px;
   line-height: 30px;
   padding: 15px;
   border-top-left-radius: 35px;
   border-bottom-left-radius: 35px;
   color: #19ba9b;
-  width: 150px;
+  width: 100px;
   white-space: nowrap;
   box-shadow: 0 3px 10px rgba(0, 0, 0, .3);
   cursor: pointer;
   transition: all .2s;
 }
 
-.like-btn:hover,
-.like-btn.active {
+.dislike-btn {
+  color: #e8673c;
+  bottom: 120px;
+}
+
+.like-btn:hover {
   color: #fff;
   background-color: #19ba9b;
 }
 
+.dislike-btn:hover {
+  background-color: #e8673c;
+  color: #fff;
+}
 
 .post-operate {
   color: #19ba9b;
@@ -356,6 +368,7 @@ select {
 
 
 
+
 /**********/
 
 .modal-btn {
@@ -378,6 +391,7 @@ select {
 [disabled] {
   cursor: not-allowed;
 }
+
 
 
 

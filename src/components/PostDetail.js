@@ -11,9 +11,14 @@ import IconTime from "react-icons/lib/md/schedule"
 import IconDelete from "react-icons/lib/md/delete"
 import IconEdit from "react-icons/lib/md/edit"
 import IconBack from "react-icons/lib/md/arrow-back"
+import IconThumbDown from "react-icons/lib/md/thumb-down"
+import IconThumbUp from "react-icons/lib/md/thumb-up"
+
+
+
 
 // import action creater
-import { openPostModal, setCurrentPostId, setCommentList, setEditingState, delPost } from '../actions'
+import { openPostModal, setCurrentPostId, setCommentList, setEditingState, delPost, updateVote } from '../actions'
 import Comment from "./Comment"
 
 import { formatDate } from "../util/util"
@@ -40,7 +45,7 @@ class PostDetail extends React.Component {
         </div>
       )
     }
-    // console.log(post.body)
+
     return (
         <div className="detail">
           <Link className="back" to={category === "all" ? "/" : `/category/${category}`}><IconBack /> 返回</Link>
@@ -57,7 +62,8 @@ class PostDetail extends React.Component {
           <RichTextEditor readOnly value={RichTextEditor.createValueFromString(post.body, 'html')} />
           </div>
           <Comment />
-          <div className="like-btn" onClick={() => votePost(post.id)} ><IconLike size="30" /> 点击投票</div>
+          <div className="like-btn" onClick={() => votePost(post.id, "upVote")} ><IconThumbUp size="25" /> 支持</div>
+          <div className="dislike-btn" onClick={() => votePost(post.id, "downVote")} ><IconThumbDown size="25" /> 反对</div>
         </div>
     );
   }
@@ -97,7 +103,19 @@ function mapDispatchToProps (dispatch) {
           })
       })
     },
-    votePost: () => {}
+    votePost: (id, type) => {
+      const change = {
+        "upVote": 1,
+        "downVote": -1
+      }
+      dispatch((dispatch) => {
+        readableAPI
+          .votePost(id, type)
+          .then((data) => {
+            dispatch(updateVote(id, change[type]))
+          })
+      })
+    }
   }
 }
 
