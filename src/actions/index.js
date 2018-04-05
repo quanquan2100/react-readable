@@ -67,6 +67,8 @@ export const getCategories_a = (categories) => ({
 export const GET_POST_LIST = "GET_POST_LIST";
 export const PUSH_POST = "PUSH_POST";
 export const UPDATE_POST = "UPDATE_POST";
+export const MODIFY_COMMENT_NUM = "MODIFY_COMMENT_NUM";
+
 
 export const getPostList_a = (postList) => ({
   type: GET_POST_LIST,
@@ -83,6 +85,11 @@ export const updatePost = (post) => ({
   post
 });
 
+export const modifyCommentNum = (id, num) => ({
+  type: MODIFY_COMMENT_NUM,
+  id,
+  num
+})
 
 /**
  * Comment 相关 action

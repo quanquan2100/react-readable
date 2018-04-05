@@ -17,6 +17,7 @@ import {
   PUSH_POST,
   UPDATE_COMMENT,
   UPDATE_POST,
+  MODIFY_COMMENT_NUM,
 } from '../actions'
 
 const globalReducerState = {
@@ -92,6 +93,7 @@ const postState = {
 }
 
 function postReducer(state = postState, action) {
+  let copy;
   switch (action.type) {
     case GET_POST_LIST:
       return {
@@ -111,6 +113,13 @@ function postReducer(state = postState, action) {
       return {
         ...state,
         postList: updateResult
+      }
+    case MODIFY_COMMENT_NUM:
+      copy = state.postList.concat();
+      copy.forEach((post, index) => (post.id === action.id ? (copy[index].commentCount += action.num) : ""))
+      return {
+        ...state,
+        postList: copy
       }
     default:
       return state;

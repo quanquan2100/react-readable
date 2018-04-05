@@ -8,7 +8,7 @@ import  * as readableAPI from '../readableAPI'
 
 
 // import action creater
-import { closeCommentModal, pushComment, updateComment } from '../actions'
+import { closeCommentModal, pushComment, updateComment, modifyCommentNum } from '../actions'
 
 const customStyles = {
   overlay: {
@@ -127,6 +127,7 @@ function mapDispatchToProps (dispatch) {
           .addNewComment(post)
           .then((data) => {
             dispatch(pushComment(data));
+            dispatch(modifyCommentNum(data.parentId, 1)); // 评论数修改
             dispatch(closeCommentModal());
             // console.log("评论成功");
           })
