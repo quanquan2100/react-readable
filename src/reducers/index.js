@@ -29,7 +29,7 @@ const globalReducerState = {
   category: "all",
   currentPostId: "",
   currentCommentId: "",
-  order: "vote",
+  order: "time",
   modalState: "new"
 }
 

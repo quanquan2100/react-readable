@@ -28,7 +28,9 @@ class PostList extends React.Component {
     // sort
     if (order === "time") {
       // sort by time
-      showPost.sort((a, b) => (a.timestamp < b.timestamp));
+      showPost.sort((a, b) => {
+        return new Date(b.timestamp) - new Date(a.timestamp);
+      });
     } else {
       // sort by vote
       showPost.sort((a, b) => (a.voteScore < b.voteScore));
