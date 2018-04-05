@@ -25,7 +25,7 @@ class ComfirmModal extends React.Component {
   // }
 
   render() {
-    const { close, modalIsOpen } = this.props;
+    const { close } = this.props;
     const a = false;
     return (
       <Modal
@@ -48,7 +48,7 @@ class ComfirmModal extends React.Component {
 
 function mapStateToProps ({ globalReducer, categoryReducer, postReducer, commentReducer }) {
   return {
-    modalIsOpen: globalReducer.commentModalOpen
+    // modalIsOpen: globalReducer.commentModalOpen
   }
 }
 

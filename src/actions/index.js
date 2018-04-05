@@ -68,7 +68,7 @@ export const GET_POST_LIST = "GET_POST_LIST";
 export const PUSH_POST = "PUSH_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const MODIFY_COMMENT_NUM = "MODIFY_COMMENT_NUM";
-
+export const DEL_POST = "DEL_POST";
 
 export const getPostList_a = (postList) => ({
   type: GET_POST_LIST,
@@ -89,7 +89,13 @@ export const modifyCommentNum = (id, num) => ({
   type: MODIFY_COMMENT_NUM,
   id,
   num
-})
+});
+
+export const delPost = (id) => ({
+  type: DEL_POST,
+  id
+});
+
 
 /**
  * Comment 相关 action
@@ -97,6 +103,7 @@ export const modifyCommentNum = (id, num) => ({
 export const SET_COMMENT_LIST = "SET_COMMENT_LIST";
 export const PUSH_COMMENT = "PUSH_COMMENT";
 export const UPDATE_COMMENT = "UPDATE_COMMENT";
+export const DEL_COMMENT = "DEL_COMMENT";
 
 export const setCommentList = (commentList) => ({
   type: SET_COMMENT_LIST,
@@ -113,3 +120,7 @@ export const updateComment = (comment) => ({
   comment
 });
 
+export const delComment = (id) => ({
+  type: DEL_COMMENT,
+  id
+});

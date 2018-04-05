@@ -111,5 +111,22 @@ export const editComment = (id, timestamp, body) =>
     body: JSON.stringify({ timestamp, body })
   }).then(res => res.json())
 
+export const delPost = (id) =>
+  fetch(`${api}/posts/${id}`, {
+    method: "DELETE",
+    headers: {
+      ...headers
+    },
+    body: id
+  }).then(res => res.json())
+
+export const delComment = (id) =>
+  fetch(`${api}/comments/${id}`, {
+    method: "DELETE",
+    headers: {
+      ...headers
+    },
+    body: id
+  }).then(res => res.json())
 
 

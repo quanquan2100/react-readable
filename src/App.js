@@ -17,7 +17,7 @@ import EditPostModal from "./components/EditPostModal"
 import DefaultView from "./components/DefaultView"
 import PostDetail from "./components/PostDetail"
 import EditCommentModal from "./components/EditCommentModal"
-import ComfirmModal from "./components/ComfirmModal"
+// import ComfirmModal from "./components/ComfirmModal"
 
 class App extends Component {
   // constructor() {
@@ -51,7 +51,6 @@ class App extends Component {
         
         <EditPostModal />
         <EditCommentModal />
-        <ComfirmModal />
 
         <footer>made by quanquan, <a href="https://github.com/quanquan2100/react-readable" target="_blank" rel="noopener noreferrer">view in github <IconGithub /></a></footer>
       </div>

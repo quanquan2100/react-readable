@@ -18,6 +18,8 @@ import {
   UPDATE_COMMENT,
   UPDATE_POST,
   MODIFY_COMMENT_NUM,
+  DEL_POST,
+  DEL_COMMENT,
 } from '../actions'
 
 const globalReducerState = {
@@ -121,6 +123,14 @@ function postReducer(state = postState, action) {
         ...state,
         postList: copy
       }
+    case DEL_POST:
+      copy = state.postList.concat();
+      state.postList.forEach((post, index) => post.id === action.id ? (copy.splice(index, 1)) : "")
+
+      return {
+        ...state,
+        postList: copy
+      }
     default:
       return state;
   }
@@ -131,6 +141,7 @@ const commentState = {
 }
 
 function commentReducer(state = commentState, action) {
+  let copy;
   switch (action.type) {
     case SET_COMMENT_LIST:
       return {
@@ -151,6 +162,14 @@ function commentReducer(state = commentState, action) {
       return {
         ...state,
         commentList: updateResult
+      }
+    case DEL_COMMENT:
+      copy = state.commentList.concat();
+      state.commentList.forEach((comment, index) => comment.id === action.id ? (copy.splice(index, 1)) : "")
+
+      return {
+        ...state,
+        commentList: copy
       }
     default:
       return state;

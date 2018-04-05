@@ -13,7 +13,7 @@ import IconEdit from "react-icons/lib/md/edit"
 import IconBack from "react-icons/lib/md/arrow-back"
 
 // import action creater
-import { openPostModal, setCurrentPostId, setCommentList, setEditingState } from '../actions'
+import { openPostModal, setCurrentPostId, setCommentList, setEditingState, delPost } from '../actions'
 import Comment from "./Comment"
 
 import { formatDate } from "../util/util"
@@ -31,6 +31,15 @@ class PostDetail extends React.Component {
     const { editPost, delPost, votePost, currentPostId, postList, category } = this.props;
     let post = {}
     postList.forEach((p) => (p.id === currentPostId ? post = p : ""))
+
+    if (post.title === undefined) {
+      return (
+        <div className="detail">
+          <Link className="back" to={category === "all" ? "/" : `/category/${category}`}><IconBack /> 返回</Link>
+          <h2 className="article-title">该文章不存在</h2>
+        </div>
+      )
+    }
     // console.log(post.body)
     return (
         <div className="detail">
@@ -78,7 +87,16 @@ function mapDispatchToProps (dispatch) {
       dispatch(setEditingState("edit"));
       dispatch(openPostModal());
     },
-    delPost: () => {},
+    delPost: (id) => {
+      dispatch((dispatch) => {
+        readableAPI
+          .delPost(id)
+          .then((data) => {
+            dispatch(delPost(data.id))
+            // 删除完自动跳转
+          })
+      })
+    },
     votePost: () => {}
   }
 }

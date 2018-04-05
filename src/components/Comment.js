@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import  * as readableAPI from '../readableAPI'
 
 import IconComment from "react-icons/lib/md/comment"
 import IconDelete from "react-icons/lib/md/delete"
 import IconEdit from "react-icons/lib/md/edit"
 
-import { openCommentModal, setCurrentCommentId, setEditingState } from '../actions'
+import { openCommentModal, setCurrentCommentId, setEditingState, delComment, modifyCommentNum } from '../actions'
 import { formatDate } from "../util/util"
 
 
@@ -17,7 +18,6 @@ class Comment extends React.Component {
 
   render() {
     const { editComment, delComment, addComment, commentList } = this.props;
-    let commentes = commentList;
     return (
       <div className="comment">
         <ul className="comment-list">
@@ -64,7 +64,17 @@ function mapDispatchToProps (dispatch) {
       dispatch(setEditingState("edit"));
       dispatch(openCommentModal());
     },
-    delComment: () => {},
+    delComment: (id) => {
+      dispatch((dispatch) => {
+        readableAPI
+          .delComment(id)
+          .then((data) => {
+            dispatch(delComment(data.id))
+            // 删除完更新对应评论数
+            dispatch(modifyCommentNum(data.parentId, -1))
+          })
+      })
+    },
 
   }
 }
